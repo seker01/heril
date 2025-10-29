@@ -1,0 +1,15 @@
+name: Build Layer
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: public.ecr.aws/lambda/python:3.13
+    steps:
+      - run: |
+          mkdir python
+          pip install requests beautifulsoup4 lxml openai -t python/
+          zip -r layer.zip python/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: layer
+          path: layer.zip
