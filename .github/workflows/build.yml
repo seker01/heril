@@ -3,34 +3,22 @@ on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: public.ecr.aws/lambda/python:3.13
     steps:
-      - run: |
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+      
+      - name: Install dependencies
+        run: |
           mkdir python
           pip install requests beautifulsoup4 lxml openai -t python/
-          zip -r layer.zip python/
-      - uses: actions/upload-artifact@v3
+      
+      - name: Create ZIP
+        run: zip -r layer.zip python/
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
           name: layer
           path: layer.zip
-```
-
-5. **Commit changes...**
-
----
-
-## Alternatif: Mevcut Dosyayı Taşı
-
-1. **Code** sekmesi → `Build Layer` dosyasını sil
-2. Yukarıdaki adımları takip et
-
----
-
-## Sonuç:
-
-Dosya yapısı şöyle olmalı:
-```
-repo/
-  .github/
-    workflows/
-      build.yml
