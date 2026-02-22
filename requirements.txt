@@ -1,0 +1,13 @@
+pandas>=2.1
+numpy>=1.26
+SQLAlchemy>=2.0
+psycopg2-binary>=2.9
+fastapi>=0.115
+uvicorn>=0.30
+streamlit>=1.36
+requests>=2.31
+python-dotenv>=1.0
+pydantic>=2.8
+pytest>=8.0
+pytest-mock>=3.12
+scikit-learn>=1.4
